@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import InfoAll from "./components/infoAll";
+import { MachineDTO, Machine } from "./models";
+import axios from "axios";
 
-function App() {
+const list: MachineDTO[] = [
+  {
+    name: "Machine 1",
+    id: 1,
+  },
+  {
+    name: "Machine 2",
+    id: 2,
+  },
+  {
+    name: "Machine 3",
+    id: 3,
+  },
+  {
+    name: "Machine 4",
+    id: 4,
+  },
+];
+
+export default function App() {
+  const [machines, setMachines] = useState<Machine[]>([]);
+
+  const getMachines = async () => {
+    //https://localhost:7024/Machine/all
+    //Object Destructuring
+    const { data } = await axios.get("https://localhost:7024/Machine/all");
+    console.log(data);
+    setMachines(data);
+  };
+
+  useEffect(() => {
+    getMachines();
+  }, []);
+
   return (
     <div className="container">
       <nav>Navbar</nav>
@@ -10,17 +45,10 @@ function App() {
         <p>Machines</p>
         <p>Time</p>
       </div>
-      <div id="info">
-        <InfoAll />
-      </div>
 
-      {/* <div id="sidebar">Sidebar</div>
-      <div id="content1">Content1</div>
-      <div id="content2">Content2</div>
-      <div id="content3">Content3</div>
-      <footer>Footer</footer> */}
+      <div id="info">
+        <InfoAll machines={machines} />
+      </div>
     </div>
   );
 }
-
-export default App;

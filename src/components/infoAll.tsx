@@ -1,15 +1,37 @@
 import React from "react";
 import "./infoAll.css";
-import machine from "../img/tempIsland.jpeg";
+import machineImg from "../img/tempIsland.jpeg";
+import { Machine } from "../models";
 
-function infoAll() {
+interface Props {
+  machines: Machine[];
+}
+
+export default function infoAll(props: Props) {
   return (
-    <div className="box">
-      <img src={machine} alt="Machine" />
-      {/* <div id="block"></div> */}
-      <p>Timeline for machine</p>
+    <div>
+      {props.machines.map((machine) => {
+        const { Name, idMachine } = machine;
+
+        return (
+          <div className="box" key={idMachine}>
+            <img src={machineImg} alt="Machine" />
+            <p>{`Name: ${Name}  ID: ${idMachine}`}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-export default infoAll;
+// const [machines, setMachines] = useState([]);
+
+// useEffect(()=>{
+//   axios.get(`https://localhost:7024/Machine/all`)
+//     .then(res => {
+//       console.log(res);
+//     })
+//     .catch(err=>{
+//       console.log(err);
+//     })
+// })
