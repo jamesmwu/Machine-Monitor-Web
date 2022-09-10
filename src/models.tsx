@@ -1,15 +1,10 @@
 export interface MachineDTO {
-  name: string;
-  id: number;
-}
-
-export interface Machine {
   idMachine: number;
   Name: string;
   IP: string;
 }
 
-export interface Time {
+export interface TimeDTO {
   idTime: number;
   StackLight: string;
   idMachine: number;

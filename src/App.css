@@ -27,21 +27,21 @@
 }
 
 nav {
-  background-color: #a7ffeb;
+  background-color: #5171a5;
   grid-area: nav;
   border-radius: var(--main-radius);
   padding: var(--nav-padding);
   margin-bottom: var(--nav-margin);
+  flex-direction: row;
 }
 
 #info {
-  /* background-color: red; */
   grid-area: info;
   margin: 30px;
 }
 
 #names {
-  background-color: yellow;
+  background-color: #eef36a;
   justify-content: space-between;
   display: grid;
   grid-template-columns: 1fr 1fr;

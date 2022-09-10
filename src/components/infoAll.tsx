@@ -1,37 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./infoAll.css";
 import machineImg from "../img/tempIsland.jpeg";
-import { Machine } from "../models";
+import { MachineDTO, TimeDTO } from "../models";
+import axios from "axios";
+import InfoItem from "./infoItem";
 
 interface Props {
-  machines: Machine[];
+  machines: MachineDTO[];
+  beginDay: string;
+  endDay: string;
 }
 
-export default function infoAll(props: Props) {
+export default function InfoAll(props: Props) {
   return (
     <div>
       {props.machines.map((machine) => {
-        const { Name, idMachine } = machine;
-
         return (
-          <div className="box" key={idMachine}>
-            <img src={machineImg} alt="Machine" />
-            <p>{`Name: ${Name}  ID: ${idMachine}`}</p>
-          </div>
+          <InfoItem
+            machine={machine}
+            start={props.beginDay}
+            end={props.endDay}
+            key={machine.idMachine}
+          />
         );
       })}
     </div>
   );
 }
-
-// const [machines, setMachines] = useState([]);
-
-// useEffect(()=>{
-//   axios.get(`https://localhost:7024/Machine/all`)
-//     .then(res => {
-//       console.log(res);
-//     })
-//     .catch(err=>{
-//       console.log(err);
-//     })
-// })
