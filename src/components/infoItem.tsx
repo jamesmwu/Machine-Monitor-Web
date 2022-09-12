@@ -3,6 +3,9 @@ import "./infoAll.css";
 import machineImg from "../img/tempIsland.jpeg";
 import { MachineDTO, TimeDTO } from "../models";
 import axios from "axios";
+import LightTimeline from "./lightTimeline";
+import { TimelineOptions } from "vis-timeline";
+import moment from "moment";
 
 interface Props {
   machine: MachineDTO;
@@ -11,6 +14,51 @@ interface Props {
 }
 
 export default function InfoItem(props: Props) {
+  //DATA
+  const [startEnd] = React.useState([
+    moment().subtract(1, "d").toDate(),
+    moment().toDate(),
+  ]);
+
+  const options: TimelineOptions = {
+    start: "2022-07-15",
+    end: "2022-07-16",
+    min: "2022-07-15",
+    max: "2022-07-16",
+    // verticalScroll: true,
+    // horizontalScroll: true,
+    // zoomKey: "ctrlKey",
+    // orientation: "both",
+    // zoomMin: 1000 * 60 * 60 * 240,
+  };
+
+  const groups = [
+    {
+      id: 1,
+      content: "Stack Light",
+    },
+  ];
+
+  const items = [
+    {
+      id: 11,
+      group: 1,
+      start: startEnd[0],
+      end: startEnd[1],
+      content: "Hello",
+      className: "tl-item",
+    },
+    {
+      id: 22,
+      group: 2,
+      start: startEnd[0],
+      end: startEnd[1],
+      content: "Nested Hello",
+      className: "tl-item",
+    },
+  ];
+  //DATA END
+
   const { Name, idMachine, IP } = props.machine;
   const [times, setTimes] = useState<TimeDTO[]>([]);
   const [light, setLight] = useState("");
@@ -18,6 +66,7 @@ export default function InfoItem(props: Props) {
   const getTimes = async () => {
     // 2022-07-15
     // 2022-07-16
+
     let cmd =
       "https://localhost:7024/Time/Date-Machine?begin=" +
       props.start +
@@ -26,7 +75,29 @@ export default function InfoItem(props: Props) {
       "&machineId=" +
       props.machine.idMachine +
       "&limit=100";
+    // console.log(cmd);
+
     const { data } = await axios.get(cmd);
+    // data.catch(() => {
+    //   console.log("Error detected");
+    // });
+
+    // data.catch(function (error) {
+    //   if (error.response) {
+    //     // Request made and server responded
+    //     console.log(error.response.data);
+    //     console.log(error.response.status);
+    //     console.log(error.response.headers);
+    //   } else if (error.request) {
+    //     // The request was made but no response was received
+    //     console.log(error.request);
+    //   } else {
+    //     // Something happened in setting up the request that triggered an Error
+    //     console.log('Error', error.message);
+    //   }
+
+    // });
+
     setTimes(data);
 
     let text = "";
@@ -39,7 +110,7 @@ export default function InfoItem(props: Props) {
 
   useEffect(() => {
     getTimes();
-  }, [times]);
+  }, [times, props.start, props.end]);
 
   return (
     <div className="box" key={idMachine}>
@@ -49,7 +120,8 @@ export default function InfoItem(props: Props) {
         <p>{`IP: ${IP}`}</p>
       </div>
 
-      <p>{light}</p>
+      {/* <p>{light}</p> */}
+      <LightTimeline groups={groups} options={options} items={items} />
     </div>
   );
 }

@@ -6,8 +6,8 @@ import axios from "axios";
 
 export default function App() {
   const [machines, setMachines] = useState<MachineDTO[]>([]);
-  const [beginDate, setBeginDate] = useState("2022-07-15");
-  const [endDate, setEndDate] = useState("2022-07-16");
+  const [beginDate, setBeginDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const beginDateInputRef =
     React.useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -27,15 +27,16 @@ export default function App() {
   function handleClick() {
     setBeginDate(beginDateInputRef.current.value);
     setEndDate(endDateInputRef.current.value);
-    // console.log(inputRef.current.value);
+    console.log(beginDateInputRef.current.value);
+    console.log(endDateInputRef.current.value);
   }
 
   return (
     <div className="container">
       <nav>
         <label>Enter Date: </label>
-        <input ref={beginDateInputRef} type="text" defaultValue="2022-07-15" />
-        <input ref={endDateInputRef} type="text" defaultValue="2022-07-16" />
+        <input ref={beginDateInputRef} type="text" />
+        <input ref={endDateInputRef} type="text" />
         <button onClick={handleClick}>Submit</button>
       </nav>
       <div id="names">

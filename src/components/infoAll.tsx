@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./infoAll.css";
-import machineImg from "../img/tempIsland.jpeg";
 import { MachineDTO, TimeDTO } from "../models";
 import axios from "axios";
 import InfoItem from "./infoItem";
@@ -12,6 +11,10 @@ interface Props {
 }
 
 export default function InfoAll(props: Props) {
+  useEffect(() => {
+    console.log("Date passed");
+  }, [props.beginDay, props.endDay]);
+
   return (
     <div>
       {props.machines.map((machine) => {
