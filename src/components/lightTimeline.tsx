@@ -8,11 +8,11 @@ interface Props {
   items: vistimeline.DataItemCollectionType;
   groups: vistimeline.DataGroupCollectionType;
   options?: vistimeline.TimelineOptions;
-  rangeChangeHandler?: (props: any) => void;
+  // rangeChangeHandler?: (props: any) => void;
 }
 
 export default function LightTimeline(props: Props) {
-  const { items, groups, options, rangeChangeHandler } = props;
+  const { items, groups, options } = props;
 
   const [element, setElement] = React.useState<HTMLDivElement | null>(null);
   const [timeline, setTimeline] = React.useState<vistimeline.Timeline | null>(
@@ -32,11 +32,14 @@ export default function LightTimeline(props: Props) {
   }, [timeline, groups]);
 
   React.useEffect(() => {
+    // console.log(items);
+
     timeline?.setItems(items);
   }, [timeline, items]);
 
   React.useEffect(() => {
     if (options && timeline) {
+      // console.log(options);
       timeline.setOptions(options);
     }
   }, [timeline, options]);

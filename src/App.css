@@ -29,7 +29,7 @@
 nav {
   background-color: #5171a5;
   grid-area: nav;
-  border-radius: var(--main-radius);
+  /* border-radius: var(--main-radius); */
   padding: var(--nav-padding);
   margin-bottom: var(--nav-margin);
   flex-direction: row;

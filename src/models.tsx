@@ -10,3 +10,9 @@ export interface TimeDTO {
   idMachine: number;
   Time: string;
 }
+
+// export interface TimelineDTO {
+//   items: vistimeline.DataItemCollectionType,
+//   groups: vistimeline.DataGroupCollectionType,
+//   options?: vistimeline.TimelineOptions,
+// }

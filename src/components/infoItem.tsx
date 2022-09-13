@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./infoAll.css";
+import "./infoItem.css";
 import machineImg from "../img/tempIsland.jpeg";
 import { MachineDTO, TimeDTO } from "../models";
 import axios from "axios";
 import LightTimeline from "./lightTimeline";
 import { TimelineOptions } from "vis-timeline";
 import moment from "moment";
+import { start } from "repl";
 
 interface Props {
   machine: MachineDTO;
@@ -14,47 +15,44 @@ interface Props {
 }
 
 export default function InfoItem(props: Props) {
-  //DATA
-  const [startEnd] = React.useState([
-    moment().subtract(1, "d").toDate(),
-    moment().toDate(),
-  ]);
-
-  const options: TimelineOptions = {
-    start: "2022-07-15",
-    end: "2022-07-16",
-    min: "2022-07-15",
-    max: "2022-07-16",
-    // verticalScroll: true,
-    // horizontalScroll: true,
-    // zoomKey: "ctrlKey",
-    // orientation: "both",
-    // zoomMin: 1000 * 60 * 60 * 240,
-  };
-
   const groups = [
     {
-      id: 1,
+      id: 0,
       content: "Stack Light",
     },
   ];
 
+  //DATA
+  const options: TimelineOptions = {
+    start: "9/12/2022 00:00:00",
+    end: "9/12/2022 24:00:00",
+    min: "9/12/2022 00:00:00",
+    max: "9/12/2022 24:00:00",
+    editable: false,
+    moveable: true,
+    stack: false,
+    selectable: false,
+    showMajorLabels: true,
+    showMinorLabels: true,
+    orientation: "top",
+  };
+
   const items = [
     {
-      id: 11,
-      group: 1,
-      start: startEnd[0],
-      end: startEnd[1],
-      content: "Hello",
-      className: "tl-item",
+      id: 0,
+      group: 0,
+      start: "2022-09-12T08:00:00",
+      end: "2022-09-12T09:00:00",
+      content: "",
+      className: "red",
     },
     {
-      id: 22,
-      group: 2,
-      start: startEnd[0],
-      end: startEnd[1],
-      content: "Nested Hello",
-      className: "tl-item",
+      id: 1,
+      group: 0,
+      start: "2022-09-12T09:00:00",
+      end: "2022-09-12T10:00:00",
+      content: "",
+      className: "green",
     },
   ];
   //DATA END
@@ -78,27 +76,9 @@ export default function InfoItem(props: Props) {
     // console.log(cmd);
 
     const { data } = await axios.get(cmd);
-    // data.catch(() => {
-    //   console.log("Error detected");
-    // });
+    //TODO: data.catch() error for invalid date entered
 
-    // data.catch(function (error) {
-    //   if (error.response) {
-    //     // Request made and server responded
-    //     console.log(error.response.data);
-    //     console.log(error.response.status);
-    //     console.log(error.response.headers);
-    //   } else if (error.request) {
-    //     // The request was made but no response was received
-    //     console.log(error.request);
-    //   } else {
-    //     // Something happened in setting up the request that triggered an Error
-    //     console.log('Error', error.message);
-    //   }
-
-    // });
-
-    setTimes(data);
+    setTimes(data); //Sets all times for the current machine
 
     let text = "";
 
@@ -119,9 +99,9 @@ export default function InfoItem(props: Props) {
         <img src={machineImg} alt="Machine" />
         <p>{`IP: ${IP}`}</p>
       </div>
-
-      {/* <p>{light}</p> */}
-      <LightTimeline groups={groups} options={options} items={items} />
+      <div style={{ textAlign: "left" }}>
+        <LightTimeline groups={groups} options={options} items={items} />
+      </div>
     </div>
   );
 }
