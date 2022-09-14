@@ -1,7 +1,15 @@
-.red {
+.RED {
   background-color: red;
 }
 
-.green {
+.GREEN {
   background-color: green;
+}
+
+.YELLOW {
+  background-color: yellow;
+}
+
+.GRAY {
+  background-color: gray;
 }

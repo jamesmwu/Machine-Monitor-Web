@@ -64,10 +64,10 @@ export default function InfoItem(props: Props) {
   const [times, setTimes] = useState<TimeDTO[]>([]);
   const [items, setItems] = useState<visTimeData>([]);
   const [options, setOptions] = useState<TimelineOptions>({
-    start: "9/12/2022 00:00:00",
-    end: "9/12/2022 24:00:00",
-    min: "9/12/2022 00:00:00",
-    max: "9/12/2022 24:00:00",
+    start: "2022-07-15 00:00:00",
+    end: "2022-07-15 24:00:00",
+    min: "2022-07-15 00:00:00",
+    max: "2022-07-15 24:00:00",
     editable: false,
     moveable: true,
     stack: false,
@@ -76,7 +76,6 @@ export default function InfoItem(props: Props) {
     showMinorLabels: true,
     orientation: "top",
   });
-  var idx = 0;
 
   const getTimes = async () => {
     // 2022-07-15
@@ -96,12 +95,23 @@ export default function InfoItem(props: Props) {
     //TODO: data.catch() error for invalid date entered
 
     setTimes(data); //Sets all times for the current machine
-    // times.forEach(element => {
-    //   const temp : visTimeItem {
-    //     id: idx,
+    let tempItemArray: visTimeData = [];
+    let temp: visTimeItem;
 
-    //   }
-    // })
+    for (let i = 0; i < times.length - 1; i++) {
+      temp = {
+        id: i,
+        group: 0,
+        start: times[i].Time,
+        end: times[i + 1].Time,
+        content: "",
+        className: times[i].StackLight,
+      };
+
+      if (times.length > 0) tempItemArray.push(temp);
+    }
+
+    setItems(tempItemArray);
   };
 
   useEffect(() => {

@@ -6,8 +6,8 @@ import axios from "axios";
 
 export default function App() {
   const [machines, setMachines] = useState<MachineDTO[]>([]);
-  const [beginDate, setBeginDate] = useState("2022-09-12");
-  const [endDate, setEndDate] = useState("2022-09-13");
+  const [beginDate, setBeginDate] = useState("2022-07-15");
+  const [endDate, setEndDate] = useState("2022-07-16");
 
   const beginDateInputRef =
     React.useRef() as React.MutableRefObject<HTMLInputElement>;
