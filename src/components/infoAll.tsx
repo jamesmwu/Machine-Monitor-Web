@@ -11,9 +11,9 @@ interface Props {
 }
 
 export default function InfoAll(props: Props) {
-  useEffect(() => {
-    console.log("Date passed");
-  }, [props.beginDay, props.endDay]);
+  // useEffect(() => {
+  //   console.log("Date passed");
+  // }, [props.beginDay, props.endDay]);
 
   return (
     <div>

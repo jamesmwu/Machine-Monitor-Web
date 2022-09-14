@@ -35,8 +35,18 @@ export default function App() {
     <div className="container">
       <nav>
         <label>Enter Date: </label>
-        <input ref={beginDateInputRef} type="text" placeholder="YYYY-MM-DD" />
-        <input ref={endDateInputRef} type="text" placeholder="YYYY-MM-DD" />
+        <input
+          ref={beginDateInputRef}
+          type="text"
+          placeholder="YYYY-MM-DD TT:TT:TT"
+          style={{ width: 153 }}
+        />
+        <input
+          ref={endDateInputRef}
+          type="text"
+          placeholder="YYYY-MM-DD TT:TT:TT"
+          style={{ width: 153 }}
+        />
         <button onClick={handleClick}>Submit</button>
       </nav>
       <div id="names">
