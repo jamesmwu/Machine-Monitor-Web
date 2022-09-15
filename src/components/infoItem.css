@@ -13,3 +13,27 @@
 .GRAY {
   background-color: gray;
 }
+
+.vis-item.red {
+  background-color: red;
+  color: white;
+  border-color: darkred;
+}
+
+.vis-item.green {
+  background-color: green;
+  color: white;
+  border-color: darkgreen;
+}
+
+.vis-item.yellow {
+  background-color: yellow;
+  color: white;
+  border-color: darkgoldenrod;
+}
+
+.vis-item.gray {
+  background-color: gray;
+  color: white;
+  border-color: darkgray;
+}

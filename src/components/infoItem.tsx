@@ -21,13 +21,6 @@ interface visTimeItem {
   className: string;
 }
 
-interface visTimeOptions {
-  start: string;
-  end: string;
-  min: string;
-  max: string;
-}
-
 export interface visTimeData extends Array<visTimeItem> {}
 
 export default function InfoItem(props: Props) {
@@ -105,7 +98,7 @@ export default function InfoItem(props: Props) {
         start: times[i].Time,
         end: times[i + 1].Time,
         content: "",
-        className: times[i].StackLight,
+        className: times[i].StackLight.toLowerCase(),
       };
 
       if (times.length > 0) tempItemArray.push(temp);
@@ -116,11 +109,18 @@ export default function InfoItem(props: Props) {
 
   useEffect(() => {
     getTimes();
-    let temp: visTimeOptions = {
+    let temp: TimelineOptions = {
       start: props.start,
       end: props.end,
       min: props.start,
       max: props.end,
+      editable: false,
+      moveable: true,
+      stack: false,
+      selectable: false,
+      showMajorLabels: true,
+      showMinorLabels: true,
+      orientation: "top",
     };
     setOptions(temp);
   }, [times, props.start, props.end]);
