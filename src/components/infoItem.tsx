@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "./infoItem.css";
-import machineImg from "../img/tempIsland.jpeg";
+import TMC10 from "../img/TMC10.jpeg";
+import VMC2 from "../img/VMC2.jpeg";
+import VMC10 from "../img/VMC10.jpeg";
+import XYZ1632 from "../img/XYZ1632.jpeg";
+import island from "../img/tempIsland.jpeg";
 import { MachineDTO, TimeDTO } from "../models";
 import axios from "axios";
 import LightTimeline from "./lightTimeline";
@@ -31,31 +35,11 @@ export default function InfoItem(props: Props) {
     },
   ];
 
-  //useMemo to set options
-  // const [options, setOptions] = useState<visTimeOptions>();
-
-  // const items = [
-  //   {
-  //     id: 0,
-  //     group: 0,
-  //     start: "2022-09-12T08:00:00",
-  //     end: "2022-09-12T09:00:00",
-  //     content: "",
-  //     className: "red",
-  //   },
-  //   {
-  //     id: 1,
-  //     group: 0,
-  //     start: "2022-09-12T09:00:00",
-  //     end: "2022-09-12T10:00:00",
-  //     content: "",
-  //     className: "green",
-  //   },
-  // ];
-  //DATA END
   const { Name, idMachine, IP } = props.machine;
   const [times, setTimes] = useState<TimeDTO[]>([]);
   const [items, setItems] = useState<visTimeData>([]);
+  const [machineImg, setMachineImg] = useState(TMC10);
+
   const [options, setOptions] = useState<TimelineOptions>({
     start: "2022-07-15 00:00:00",
     end: "2022-07-15 24:00:00",
@@ -124,6 +108,27 @@ export default function InfoItem(props: Props) {
     };
     setOptions(temp);
   }, [times, props.start, props.end]);
+
+  useEffect(() => {
+    switch (props.machine.idMachine) {
+      case 7:
+        setMachineImg(TMC10);
+        break;
+      case 8:
+      case 13:
+        setMachineImg(VMC2);
+        break;
+      case 10:
+      case 12:
+        setMachineImg(VMC10);
+        break;
+      case 9:
+        setMachineImg(XYZ1632);
+        break;
+      default:
+        setMachineImg(island);
+    }
+  }, []);
 
   return (
     <div className="box" key={idMachine}>
